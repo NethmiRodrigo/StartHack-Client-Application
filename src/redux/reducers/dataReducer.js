@@ -15,7 +15,6 @@ export default function (state = initialState, action) {
 				...state,
 				authenticated: true,
 				loading: false,
-				user: action.payload,
 			};
 		}
 		case SET_UNAUTHENTICATED: {
@@ -26,6 +25,7 @@ export default function (state = initialState, action) {
 				user: {},
 			};
 		}
+
 		default:
 			return state;
 	}

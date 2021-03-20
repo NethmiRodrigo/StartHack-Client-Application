@@ -11,7 +11,6 @@ const Login = (props) => {
 	const [errors, seterrors] = useState({});
 
 	const handlesubmit = () => {
-		console.log("Clicked");
 		let errorObj = {};
 		if (dealership === "") errorObj.dealership = "invalid";
 		if (password === "") errorObj.password = "invalid";

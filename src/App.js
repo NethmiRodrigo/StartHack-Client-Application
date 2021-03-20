@@ -12,6 +12,8 @@ import { SET_AUTHENTICATED } from "./redux/types";
 import { logoutUser } from "./redux/actions/data_actions";
 
 import "./App.css";
+import { getAllRooms } from "./redux/actions/ui_actions";
+import AuthRoute from "./components/authroute/authroute";
 
 axios.defaults.baseURL = "http://localhost:5000";
 
@@ -25,8 +27,9 @@ if (token) {
 		store.dispatch(logoutUser());
 		window.location.href = "/login";
 	} else {
-		store.dispatch({ type: SET_AUTHENTICATED });
+		store.dispatch({ type: SET_AUTHENTICATED, payload: token });
 		axios.defaults.headers.common["Authorization"] = token;
+		store.dispatch(getAllRooms());
 	}
 }
 
@@ -38,7 +41,7 @@ function App() {
 					<Switch>
 						<Route exact path="/" component={Landing} />
 						<Route path="/login" component={Login} />
-						<Route path="/register" component={Register} />
+						<AuthRoute path="/register" component={Register} />
 					</Switch>
 				</Router>
 			</Provider>

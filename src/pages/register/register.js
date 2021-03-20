@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Navigation from "../../components/navbar/navbar";
@@ -6,31 +6,35 @@ import { register } from "../../redux/actions/data_actions";
 
 const Register = (props) => {
 	const {
-		UI: { loading },
+		UI: { loading, created, rooms },
 	} = props;
-	const [dealership, setdealership] = useState("");
-	const [username, setusername] = useState("");
-	const [confirmPassword, setconfirmPassword] = useState("");
-	const [password, setpassword] = useState("");
+	const [room_name, setroomname] = useState("");
+	const [roomsState, setroomsState] = useState(rooms);
 	const [errors, seterrors] = useState({});
 
-	const handlesubmit = () => {
-		console.log("Clicked");
-		let errorObj = {};
-		if (dealership === "") errorObj.dealership = "invalid";
-		if (password === "") errorObj.password = "invalid";
-		if (username === "") errorObj.username = "invalid";
-		if (confirmPassword === "") errorObj.confirmPassword = "invalid";
-		if (password !== confirmPassword) errorObj.confirmPassword = "invalid";
-		if (Object.keys(errorObj).length === 0) {
-			let user = {
-				user: {
-					name: username,
-				},
-			};
-			props.register();
-		} else seterrors(errorObj);
+	useEffect(() => {
+		props.UI.errors && seterrors(props.UI.errors.error);
+	}, [props.UI.errors]);
+
+	useEffect(() => {
+		props.UI.rooms && setroomsState(props.UI.rooms);
+	}, [props.UI.rooms]);
+
+	const handlesubmit = (room_name) => {
+		let room = { name: room_name };
+		props.register(room);
 	};
+
+	const isCreated = (room) => {
+		let found = false;
+		let allrooms = [];
+		if (rooms.length > 0) allrooms = [...roomsState];
+		allrooms.forEach((element) => {
+			if (element["name"] === room) found = true;
+		});
+		return found;
+	};
+
 	return (
 		<div className="flex flex-1 flex-col img-bg" style={{ minHeight: "100vH" }}>
 			<Navigation />
@@ -38,122 +42,91 @@ const Register = (props) => {
 				className="flex flex-1 flex-col lg:flex-row xl:flex-row 2xl:flex-row"
 				style={{ padding: "4rem" }}
 			>
-				<div className="flex flex-col flex-1 justify-center items-center">
-					<div className="flex flex-1 flex-col lg:w-8/12 bg-gray-400 bg-opacity-25 m-2 rounded-lg p-5">
-						<div className="flex justify-center items-center">
-							<img
-								className="bg-gray m-2 rounded-full p-2"
-								src="https://cdn0.iconfinder.com/data/icons/cars-22/512/Mersedes-512.png"
-								alt="car"
-								width={180}
-								height={180}
-							/>
-						</div>
-						<div className="mx-48 mb-4">
-							<label
-								className="block text-white tracking-normal text-md font-bold mb-2"
-								for="dealership"
-							>
-								Dealership ID
-							</label>
-							<input
-								className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-								id="dealership"
-								value={dealership}
-								onChange={(e) => {
-									setdealership(e.target.value);
-									seterrors({});
-								}}
-								type="text"
-								placeholder="ID"
-							/>
-							{errors?.dealership && (
-								<p className="text-red-500 text-sm italic">
-									Please enter the dealership ID
-								</p>
-							)}
-						</div>
-						<div className="mx-48 mb-4">
-							<label
-								className="block text-white tracking-normal text-md font-bold mb-2"
-								for="dealership"
-							>
-								User Account Name
-							</label>
-							<input
-								className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-								id="dealership"
-								value={username}
-								onChange={(e) => {
-									setusername(e.target.value);
-									seterrors({});
-								}}
-								type="text"
-								placeholder="ID"
-							/>
-							{errors?.username && (
-								<p className="text-red-500 text-sm italic">
-									Please enter a name
-								</p>
-							)}
-						</div>
-						<div className="mx-48 mb-4">
-							<label
-								className="block text-white tracking-normal text-md font-bold mb-2"
-								for="password"
-							>
-								Password
-							</label>
-							<input
-								className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-								id="password"
-								value={password}
-								onChange={(e) => {
-									setpassword(e.target.value);
-									seterrors({});
-								}}
-								type="password"
-								placeholder="Password"
-							/>
-							{errors?.password && (
-								<p className="text-red-500 text-sm italic">
-									Please enter a valid password
-								</p>
-							)}
-						</div>
-						<div className="mx-48 mb-4">
-							<label
-								className="block text-white tracking-normal text-md font-bold mb-2"
-								for="password"
-							>
-								Confirm Password
-							</label>
-							<input
-								className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-								id="password"
-								value={confirmPassword}
-								onChange={(e) => {
-									setconfirmPassword(e.target.value);
-									seterrors({});
-								}}
-								type="password"
-								placeholder="Confirm Password"
-							/>
-							{errors?.confirmPassword && (
-								<p className="text-red-500 text-sm italic">
-									Passwords have to be same
-								</p>
-							)}
-						</div>
-						<button
-							type="submit"
-							onClick={() => {
-								handlesubmit();
-							}}
-							className="mx-48 transition duration-500 ease-in-out hover:bg-gray-100 text-gray-400 font-semibold py-2 px-4 border border-gray-400 rounded shadow transform hover:-translate-y-1 hover:scale-110"
-						>
-							Login
-						</button>
+				<div
+					onClick={() => {
+						if (rooms.length > 0 && !isCreated("Vehicle Handover")) {
+							handlesubmit("Vehicle Handover");
+						}
+					}}
+					className="p-2 flex flex-col bg-gray-400 bg-opacity-25 lg:w-3/12 justify-center items-center m-2 rounded-lg transition duration-500 ease-in-out transform hover:-translate-y-3 hover:scale-105 cursor-pointer"
+				>
+					<div className="flex flex-1 flex-col justify-center items-center m-2 rounded-lg p-2">
+						<p className="text-base text-white">Vehicle Handover</p>
+
+						{isCreated("Vehicle Handover") && (
+							<div className="m-2 bg-green-400 p-2 rounded-full font-bold">
+								Created!
+							</div>
+						)}
+					</div>
+				</div>
+				<div className="flex flex-col flex-1">
+					<div
+						onClick={() => {
+							if (rooms.length > 0 && !rooms.includes("Main Service Area")) {
+								handlesubmit("Main Service Area");
+							}
+						}}
+						className="p-2 flex flex-1 flex-col bg-gray-400 bg-opacity-25 justify-center items-center m-2 rounded-lg transition duration-500 ease-in-out transform hover:-translate-y-3 hover:scale-105 cursor-pointer"
+					>
+						<p className="text-base text-white">Main Service Area</p>
+
+						{isCreated("Main Service Area") && (
+							<div className="m-2 bg-green-400 p-2 rounded-full font-bold">
+								Created!
+							</div>
+						)}
+					</div>
+					<div
+						onClick={() => {
+							if (rooms.length > 0 && !rooms.includes("Vehicle Display")) {
+								handlesubmit("Vehicle Display");
+							}
+						}}
+						className="p-2 flex flex-1 flex-col bg-gray-400 bg-opacity-25 m-2 justify-center items-center rounded-lg transition duration-500 ease-in-out transform hover:-translate-y-3 hover:scale-105 cursor-pointer"
+					>
+						<p className="text-base text-white">Vehicle Display</p>
+
+						{isCreated("Vehicle Display") && (
+							<div className="m-2 bg-green-400 p-2 rounded-full font-bold">
+								Created!
+							</div>
+						)}
+					</div>
+				</div>
+
+				<div className="flex flex-col lg:w-3/12">
+					<div
+						onClick={() => {
+							if (rooms.length > 0 && !rooms.includes("Service Lobby")) {
+								handlesubmit("Service Lobby");
+							}
+						}}
+						className="p-2 flex flex-1 flex-col bg-gray-400 bg-opacity-25 justify-center items-center m-2 rounded-lg transition duration-500 ease-in-out transform hover:-translate-y-3 hover:scale-105 cursor-pointer"
+					>
+						<p className="text-base text-white">Service Lobby</p>
+
+						{isCreated("Service Lobby") && (
+							<div className="m-2 bg-green-400 p-2 rounded-full font-bold">
+								Created!
+							</div>
+						)}
+					</div>
+					<div
+						onClick={() => {
+							if (rooms.length > 0 && !rooms.includes("Service Outbound")) {
+								handlesubmit("Service Outbound");
+							}
+						}}
+						className="p-2 flex flex-1 flex-col bg-gray-400 bg-opacity-25 m-2 justify-center items-center rounded-lg transition duration-500 ease-in-out transform hover:-translate-y-3 hover:scale-105 cursor-pointer"
+					>
+						<p className="text-base text-white">Service Outbound</p>
+
+						{isCreated("Service Outbound") && (
+							<div className="m-2 bg-green-400 p-2 rounded-full font-bold">
+								Created!
+							</div>
+						)}
 					</div>
 				</div>
 			</div>

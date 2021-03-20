@@ -6,7 +6,7 @@ import logo from "../../assets/images/logo.svg";
 import { logoutUser } from "../../redux/actions/data_actions";
 
 const Navigation = (props) => {
-	const user = props.data.user;
+	const user = props.data.authenticated;
 	return (
 		<div className="flex flex-row justify-between items-center p-8">
 			<div className="text-white mr-3">
@@ -44,7 +44,7 @@ const Navigation = (props) => {
 };
 
 Navigation.propTypes = {
-	login: PropTypes.func.isRequired,
+	logoutUser: PropTypes.func.isRequired,
 	data: PropTypes.object.isRequired,
 };
 

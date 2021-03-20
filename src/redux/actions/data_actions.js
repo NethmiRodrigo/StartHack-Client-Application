@@ -5,7 +5,9 @@ import {
 	SET_ERRORS,
 	CLEAR_ERRORS,
 	SET_UNAUTHENTICATED,
+	SET_CREATED_MESSAGE,
 } from "../types";
+import { getAllRooms } from "./ui_actions";
 
 export const login = (username, password, history) => async (dispatch) => {
 	dispatch({ type: LOADING });
@@ -20,6 +22,7 @@ export const login = (username, password, history) => async (dispatch) => {
 			type: SET_AUTHENTICATED,
 			payload: results.data,
 		});
+		dispatch(getAllRooms());
 		dispatch({ type: CLEAR_ERRORS });
 		history.push("/");
 	} catch (error) {
@@ -28,17 +31,15 @@ export const login = (username, password, history) => async (dispatch) => {
 	}
 };
 
-export const register = (user) => async (dispatch) => {
+export const register = (room) => async (dispatch) => {
 	dispatch({ type: LOADING });
 	try {
-		dispatch({ type: LOADING });
-		let results = await axios.post("/create", user);
+		let results = await axios.post("/room-create", room);
+		dispatch({
+			type: SET_CREATED_MESSAGE,
+			payload: results.data.room,
+		});
 		console.log(results);
-		// dispatch({
-		// 	type: SET_AUTHENTICATED,
-		// 	payload: results,
-		// });
-		console.log(user);
 	} catch (error) {
 		console.log(error);
 		dispatch({ type: SET_ERRORS, payload: error.response?.data });
