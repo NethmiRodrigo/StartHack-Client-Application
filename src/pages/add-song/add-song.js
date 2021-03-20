@@ -96,7 +96,7 @@ const AddSong = (props) => {
 			</div>
 			<div className="flex flex-col flex-1 m-4 justify-center items-center">
 				<p className="text-3xl text-white font-semibold">All Songs</p>
-				{songs.map((element) => (
+				{songs?.map((element) => (
 					<div className="p-1 flex flex-row lg:w-4/12 bg-gray-400 bg-opacity-25 w-full justify-center items-center m-2 rounded-lg">
 						<div className="rounded-full flex justify-center items-center mx-1">
 							<img

@@ -11,4 +11,4 @@ export const SET_USER = "SET_USER";
 export const LOADING_USER = "LOADING_USER";
 
 export const SET_SONGS = "SET_SONGS";
-export const SET_PLAYLIST = "SET_PLAYLISTS";
+export const SET_PLAYLISTS = "SET_PLAYLISTS";
