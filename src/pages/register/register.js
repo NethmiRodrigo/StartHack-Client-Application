@@ -55,6 +55,15 @@ const Register = (props) => {
 								<div className="m-2 bg-yellow-100 p-2 rounded-full font-bold">
 									Access ID: {isCreated("Vehicle Handover").accessCode}
 								</div>
+								{isCreated("Vehicle Handover").fcm ? (
+									<div className="m-2 bg-green-300 p-2 rounded-full font-bold">
+										Online
+									</div>
+								) : (
+									<div className="m-2p-2 bg-red-300 p-2 rounded-full font-bold">
+										Offline
+									</div>
+								)}
 							</>
 						)}
 					</div>
@@ -78,6 +87,15 @@ const Register = (props) => {
 								<div className="m-2 bg-yellow-100 p-2 rounded-full font-bold">
 									Access ID: {isCreated("Main Service Area").accessCode}
 								</div>
+								{isCreated("Main Service Area").fcm ? (
+									<div className="m-2 bg-green-300 p-2 rounded-full font-bold">
+										Online
+									</div>
+								) : (
+									<div className="m-2p-2 bg-red-300 p-2 rounded-full font-bold">
+										Offline
+									</div>
+								)}
 							</>
 						)}
 					</div>
@@ -99,6 +117,15 @@ const Register = (props) => {
 								<div className="m-2 bg-yellow-100 p-2 rounded-full font-bold">
 									Access ID: {isCreated("Vehicle Display").accessCode}
 								</div>
+								{isCreated("Vehicle Display").fcm ? (
+									<div className="m-2 bg-green-300 p-2 rounded-full font-bold">
+										Online
+									</div>
+								) : (
+									<div className="m-2p-2 bg-red-300 p-2 rounded-full font-bold">
+										Offline
+									</div>
+								)}
 							</>
 						)}
 					</div>
@@ -123,6 +150,15 @@ const Register = (props) => {
 								<div className="m-2 bg-yellow-100 p-2 rounded-full font-bold">
 									Access ID: {isCreated("Service Lobby").accessCode}
 								</div>
+								{isCreated("Service Lobby").fcm ? (
+									<div className="m-2 bg-green-300 p-2 rounded-full font-bold">
+										Online
+									</div>
+								) : (
+									<div className="m-2p-2 bg-red-300 p-2 rounded-full font-bold">
+										Offline
+									</div>
+								)}
 							</>
 						)}
 					</div>
@@ -144,6 +180,15 @@ const Register = (props) => {
 								<div className="m-2 bg-yellow-100 p-2 rounded-full font-bold">
 									Access ID: {isCreated("Service Outbound").accessCode}
 								</div>
+								{isCreated("Service Outbound").fcm ? (
+									<div className="m-2 bg-green-300 p-2 rounded-full font-bold">
+										Online
+									</div>
+								) : (
+									<div className="m-2p-2 bg-red-300 p-2 rounded-full font-bold">
+										Offline
+									</div>
+								)}
 							</>
 						)}
 					</div>
