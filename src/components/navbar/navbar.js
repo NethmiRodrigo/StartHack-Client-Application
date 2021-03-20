@@ -15,6 +15,29 @@ const Navigation = (props) => {
 				</Link>
 			</div>
 			<div className="text-white flex flex-row uppercase text-base">
+				{user ? (
+					<>
+						<div className="p-2">
+							<button className="uppercase transition duration-500 ease-in-out hover:bg-gray-100 text-gray-400 font-semibold py-2 px-4 border border-gray-400 rounded shadow transform hover:-translate-y-1 hover:scale-110">
+								Add Song
+							</button>
+						</div>
+						<div className="p-2">
+							<button className="uppercase transition duration-500 ease-in-out hover:bg-gray-100 text-gray-400 font-semibold py-2 px-4 border border-gray-400 rounded shadow transform hover:-translate-y-1 hover:scale-110">
+								Add Playlist
+							</button>
+						</div>
+					</>
+				) : (
+					""
+				)}
+				<div className="p-2">
+					<Link to="/register">
+						<button className="uppercase transition duration-500 ease-in-out hover:bg-gray-100 text-gray-400 font-semibold py-2 px-4 border border-gray-400 rounded shadow transform hover:-translate-y-1 hover:scale-110">
+							Areas
+						</button>
+					</Link>
+				</div>
 				<div className="p-2">
 					{user ? (
 						<button
@@ -30,13 +53,6 @@ const Navigation = (props) => {
 							</button>
 						</Link>
 					)}
-				</div>
-				<div className="p-2">
-					<Link to="/register">
-						<button className="uppercase transition duration-500 ease-in-out hover:bg-gray-100 text-gray-400 font-semibold py-2 px-4 border border-gray-400 rounded shadow transform hover:-translate-y-1 hover:scale-110">
-							Create room
-						</button>
-					</Link>
 				</div>
 			</div>
 		</div>

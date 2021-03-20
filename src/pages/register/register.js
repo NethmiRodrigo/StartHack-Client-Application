@@ -55,7 +55,7 @@ const Register = (props) => {
 								<div className="m-2 bg-yellow-100 p-2 rounded-full font-bold">
 									Access ID: {isCreated("Vehicle Handover").accessCode}
 								</div>
-								{isCreated("Vehicle Handover").fcm ? (
+								{isCreated("Vehicle").fcm ? (
 									<div className="m-2 bg-green-300 p-2 rounded-full font-bold">
 										Online
 									</div>
