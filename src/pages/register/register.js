@@ -6,15 +6,9 @@ import { register } from "../../redux/actions/data_actions";
 
 const Register = (props) => {
 	const {
-		UI: { loading, created, rooms },
+		UI: { rooms },
 	} = props;
-	const [room_name, setroomname] = useState("");
 	const [roomsState, setroomsState] = useState(rooms);
-	const [errors, seterrors] = useState({});
-
-	useEffect(() => {
-		props.UI.errors && seterrors(props.UI.errors.error);
-	}, [props.UI.errors]);
 
 	useEffect(() => {
 		props.UI.rooms && setroomsState(props.UI.rooms);
@@ -30,7 +24,7 @@ const Register = (props) => {
 		let allrooms = [];
 		if (rooms.length > 0) allrooms = [...roomsState];
 		allrooms.forEach((element) => {
-			if (element["name"] === room) found = true;
+			if (element["name"] === room) found = element;
 		});
 		return found;
 	};
@@ -54,16 +48,21 @@ const Register = (props) => {
 						<p className="text-base text-white">Vehicle Handover</p>
 
 						{isCreated("Vehicle Handover") && (
-							<div className="m-2 bg-green-400 p-2 rounded-full font-bold">
-								Created!
-							</div>
+							<>
+								<div className="m-2 bg-green-400 p-2 rounded-full font-bold">
+									Created!
+								</div>
+								<div className="m-2 bg-yellow-100 p-2 rounded-full font-bold">
+									Access ID: {isCreated("Vehicle Handover").accessCode}
+								</div>
+							</>
 						)}
 					</div>
 				</div>
 				<div className="flex flex-col flex-1">
 					<div
 						onClick={() => {
-							if (rooms.length > 0 && !rooms.includes("Main Service Area")) {
+							if (rooms.length > 0 && !isCreated("Main Service Area")) {
 								handlesubmit("Main Service Area");
 							}
 						}}
@@ -72,14 +71,19 @@ const Register = (props) => {
 						<p className="text-base text-white">Main Service Area</p>
 
 						{isCreated("Main Service Area") && (
-							<div className="m-2 bg-green-400 p-2 rounded-full font-bold">
-								Created!
-							</div>
+							<>
+								<div className="m-2 bg-green-400 p-2 rounded-full font-bold">
+									Created!
+								</div>
+								<div className="m-2 bg-yellow-100 p-2 rounded-full font-bold">
+									Access ID: {isCreated("Main Service Area").accessCode}
+								</div>
+							</>
 						)}
 					</div>
 					<div
 						onClick={() => {
-							if (rooms.length > 0 && !rooms.includes("Vehicle Display")) {
+							if (rooms.length > 0 && !isCreated("Vehicle Display")) {
 								handlesubmit("Vehicle Display");
 							}
 						}}
@@ -88,9 +92,14 @@ const Register = (props) => {
 						<p className="text-base text-white">Vehicle Display</p>
 
 						{isCreated("Vehicle Display") && (
-							<div className="m-2 bg-green-400 p-2 rounded-full font-bold">
-								Created!
-							</div>
+							<>
+								<div className="m-2 bg-green-400 p-2 rounded-full font-bold">
+									Created!
+								</div>
+								<div className="m-2 bg-yellow-100 p-2 rounded-full font-bold">
+									Access ID: {isCreated("Vehicle Display").accessCode}
+								</div>
+							</>
 						)}
 					</div>
 				</div>
@@ -98,7 +107,7 @@ const Register = (props) => {
 				<div className="flex flex-col lg:w-3/12">
 					<div
 						onClick={() => {
-							if (rooms.length > 0 && !rooms.includes("Service Lobby")) {
+							if (rooms.length > 0 && !isCreated("Service Lobby")) {
 								handlesubmit("Service Lobby");
 							}
 						}}
@@ -107,14 +116,19 @@ const Register = (props) => {
 						<p className="text-base text-white">Service Lobby</p>
 
 						{isCreated("Service Lobby") && (
-							<div className="m-2 bg-green-400 p-2 rounded-full font-bold">
-								Created!
-							</div>
+							<>
+								<div className="m-2 bg-green-400 p-2 rounded-full font-bold">
+									Created!
+								</div>
+								<div className="m-2 bg-yellow-100 p-2 rounded-full font-bold">
+									Access ID: {isCreated("Service Lobby").accessCode}
+								</div>
+							</>
 						)}
 					</div>
 					<div
 						onClick={() => {
-							if (rooms.length > 0 && !rooms.includes("Service Outbound")) {
+							if (rooms.length > 0 && !isCreated("Service Outbound")) {
 								handlesubmit("Service Outbound");
 							}
 						}}
@@ -123,9 +137,14 @@ const Register = (props) => {
 						<p className="text-base text-white">Service Outbound</p>
 
 						{isCreated("Service Outbound") && (
-							<div className="m-2 bg-green-400 p-2 rounded-full font-bold">
-								Created!
-							</div>
+							<>
+								<div className="m-2 bg-green-400 p-2 rounded-full font-bold">
+									Created!
+								</div>
+								<div className="m-2 bg-yellow-100 p-2 rounded-full font-bold">
+									Access ID: {isCreated("Service Outbound").accessCode}
+								</div>
+							</>
 						)}
 					</div>
 				</div>
