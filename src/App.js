@@ -4,7 +4,7 @@ import jwtDecode from "jwt-decode";
 
 import Landing from "./pages/landing/landing";
 import Login from "./pages/login/login";
-import Register from "./pages/register/register";
+import Rooms from "./pages/rooms/rooms";
 
 import { Provider } from "react-redux";
 import store from "./redux/store";
@@ -41,7 +41,7 @@ function App() {
 					<Switch>
 						<Route exact path="/" component={Landing} />
 						<Route path="/login" component={Login} />
-						<AuthRoute path="/register" component={Register} />
+						<AuthRoute path="/rooms" component={Rooms} />
 					</Switch>
 				</Router>
 			</Provider>

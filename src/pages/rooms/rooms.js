@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import Navigation from "../../components/navbar/navbar";
 import { register } from "../../redux/actions/data_actions";
 
-const Register = (props) => {
+const Rooms = (props) => {
 	const {
 		UI: { rooms },
 	} = props;
@@ -198,7 +198,7 @@ const Register = (props) => {
 	);
 };
 
-Register.propTypes = {
+Rooms.propTypes = {
 	register: PropTypes.func.isRequired,
 	data: PropTypes.object.isRequired,
 	UI: PropTypes.object.isRequired,
@@ -213,4 +213,4 @@ const mapActionsToProps = {
 	register,
 };
 
-export default connect(mapStateToProps, mapActionsToProps)(Register);
+export default connect(mapStateToProps, mapActionsToProps)(Rooms);
