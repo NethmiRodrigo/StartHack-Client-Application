@@ -1,12 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Navigation from "../../components/navbar/navbar";
 
 const Landing = () => {
 	const about = React.createRef();
 	return (
-		<div className="flex flex-1 flex-col img-bg" style={{ minHeight: "100vH" }}>
-			<Navigation />
+		<div className="flex flex-1 flex-col" style={{ minHeight: "100vH" }}>
 			<div className="my-32 py-48 text-white flex flex-1 flex-col justify-center items-center pb-4 ">
 				<p className="text-7xl tracking-normal font-bold">MERCEDES</p>
 				<p className="text-lg">Audio Control Application</p>

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import Navigation from "../../components/navbar/navbar";
 
 import { login } from "../../redux/actions/data_actions";
 
@@ -19,14 +18,13 @@ const Login = (props) => {
 		} else seterrors(errorObj);
 	};
 	return (
-		<div className="flex flex-1 flex-col img-bg" style={{ minHeight: "100vH" }}>
-			<Navigation />
+		<div className="flex flex-1 flex-col" style={{ minHeight: "100vH" }}>
 			<div
 				className="flex flex-1 flex-col lg:flex-row xl:flex-row 2xl:flex-row"
 				style={{ padding: "4rem" }}
 			>
 				<div className="flex flex-col flex-1 justify-center items-center">
-					<div className="flex flex-1 flex-col lg:w-8/12 bg-gray-400 bg-opacity-25 m-2 rounded-lg p-5">
+					<div className="flex flex-1 flex-col lg:w-8/12 bg-gray-400 bg-opacity-25 m-2 rounded-lg p-2">
 						<div className="flex justify-center items-center">
 							<img
 								className="bg-gray m-2 rounded-full p-2"

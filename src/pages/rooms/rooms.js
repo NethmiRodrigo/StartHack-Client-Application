@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import Navigation from "../../components/navbar/navbar";
 import { register } from "../../redux/actions/data_actions";
 
 const Rooms = (props) => {
 	const {
 		UI: { rooms },
+		history,
 	} = props;
 	const [roomsState, setroomsState] = useState(rooms);
 
@@ -30,8 +30,7 @@ const Rooms = (props) => {
 	};
 
 	return (
-		<div className="flex flex-1 flex-col img-bg" style={{ minHeight: "100vH" }}>
-			<Navigation />
+		<div className="flex flex-1 flex-col" style={{ minHeight: "100vH" }}>
 			<div
 				className="flex flex-1 flex-col lg:flex-row xl:flex-row 2xl:flex-row"
 				style={{ padding: "4rem" }}
@@ -40,6 +39,8 @@ const Rooms = (props) => {
 					onClick={() => {
 						if (rooms.length > 0 && !isCreated("Vehicle Handover")) {
 							handlesubmit("Vehicle Handover");
+						} else {
+							history.push(`/room/${isCreated("Vehicle Handover").accessCode}`);
 						}
 					}}
 					className="p-2 flex flex-col bg-gray-400 bg-opacity-25 lg:w-3/12 justify-center items-center m-2 rounded-lg transition duration-500 ease-in-out transform hover:-translate-y-3 hover:scale-105 cursor-pointer"
@@ -73,6 +74,10 @@ const Rooms = (props) => {
 						onClick={() => {
 							if (rooms.length > 0 && !isCreated("Main Service Area")) {
 								handlesubmit("Main Service Area");
+							} else {
+								history.push(
+									`/room/${isCreated("Main Service Area").accessCode}`
+								);
 							}
 						}}
 						className="p-2 flex flex-1 flex-col bg-gray-400 bg-opacity-25 justify-center items-center m-2 rounded-lg transition duration-500 ease-in-out transform hover:-translate-y-3 hover:scale-105 cursor-pointer"
@@ -103,6 +108,10 @@ const Rooms = (props) => {
 						onClick={() => {
 							if (rooms.length > 0 && !isCreated("Vehicle Display")) {
 								handlesubmit("Vehicle Display");
+							} else {
+								history.push(
+									`/room/${isCreated("Vehicle Display").accessCode}`
+								);
 							}
 						}}
 						className="p-2 flex flex-1 flex-col bg-gray-400 bg-opacity-25 m-2 justify-center items-center rounded-lg transition duration-500 ease-in-out transform hover:-translate-y-3 hover:scale-105 cursor-pointer"
@@ -136,6 +145,8 @@ const Rooms = (props) => {
 						onClick={() => {
 							if (rooms.length > 0 && !isCreated("Service Lobby")) {
 								handlesubmit("Service Lobby");
+							} else {
+								history.push(`/room/${isCreated("Service Lobby").accessCode}`);
 							}
 						}}
 						className="p-2 flex flex-1 flex-col bg-gray-400 bg-opacity-25 justify-center items-center m-2 rounded-lg transition duration-500 ease-in-out transform hover:-translate-y-3 hover:scale-105 cursor-pointer"
@@ -166,6 +177,10 @@ const Rooms = (props) => {
 						onClick={() => {
 							if (rooms.length > 0 && !isCreated("Service Outbound")) {
 								handlesubmit("Service Outbound");
+							} else {
+								history.push(
+									`/room/${isCreated("Service Outbound").accessCode}`
+								);
 							}
 						}}
 						className="p-2 flex flex-1 flex-col bg-gray-400 bg-opacity-25 m-2 justify-center items-center rounded-lg transition duration-500 ease-in-out transform hover:-translate-y-3 hover:scale-105 cursor-pointer"

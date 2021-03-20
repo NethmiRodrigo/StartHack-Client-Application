@@ -2,18 +2,22 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 
-import Landing from "./pages/landing/landing";
-import Login from "./pages/login/login";
-import Rooms from "./pages/rooms/rooms";
-
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import { SET_AUTHENTICATED } from "./redux/types";
 import { logoutUser } from "./redux/actions/data_actions";
 
-import "./App.css";
 import { getAllRooms } from "./redux/actions/ui_actions";
+
 import AuthRoute from "./components/authroute/authroute";
+import Landing from "./pages/landing/landing";
+import Login from "./pages/login/login";
+import Rooms from "./pages/rooms/rooms";
+import Room from "./pages/room/room";
+import Navigation from "./components/navbar/navbar";
+import AddSong from "./pages/add-song/add-song";
+
+import "./App.css";
 
 axios.defaults.baseURL = "http://localhost:5000";
 
@@ -39,9 +43,14 @@ function App() {
 			<Provider store={store}>
 				<Router>
 					<Switch>
-						<Route exact path="/" component={Landing} />
-						<Route path="/login" component={Login} />
-						<AuthRoute path="/rooms" component={Rooms} />
+						<div className="img-bg">
+							<Navigation />
+							<Route exact path="/" component={Landing} />
+							<Route path="/login" component={Login} />
+							<AuthRoute path="/rooms" component={Rooms} />
+							<AuthRoute path="/room/:roomid" component={Room} />
+							<AuthRoute path="/add-song" component={AddSong} />
+						</div>
 					</Switch>
 				</Router>
 			</Provider>
