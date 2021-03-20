@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Navigation from "../../components/navbar/navbar";
+import { register } from "../../redux/actions/data_actions";
 
-import { login } from "../../redux/actions/data_actions";
-
-const Login = (props) => {
+const Register = (props) => {
+	const {
+		UI: { loading },
+	} = props;
 	const [dealership, setdealership] = useState("");
+	const [username, setusername] = useState("");
+	const [confirmPassword, setconfirmPassword] = useState("");
 	const [password, setpassword] = useState("");
 	const [errors, seterrors] = useState({});
 
@@ -15,8 +19,16 @@ const Login = (props) => {
 		let errorObj = {};
 		if (dealership === "") errorObj.dealership = "invalid";
 		if (password === "") errorObj.password = "invalid";
+		if (username === "") errorObj.username = "invalid";
+		if (confirmPassword === "") errorObj.confirmPassword = "invalid";
+		if (password !== confirmPassword) errorObj.confirmPassword = "invalid";
 		if (Object.keys(errorObj).length === 0) {
-			props.login(dealership, password, props.history);
+			let user = {
+				user: {
+					name: username,
+				},
+			};
+			props.register();
 		} else seterrors(errorObj);
 	};
 	return (
@@ -42,7 +54,7 @@ const Login = (props) => {
 								className="block text-white tracking-normal text-md font-bold mb-2"
 								for="dealership"
 							>
-								Username
+								Dealership ID
 							</label>
 							<input
 								className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -53,11 +65,35 @@ const Login = (props) => {
 									seterrors({});
 								}}
 								type="text"
-								placeholder="Username"
+								placeholder="ID"
 							/>
 							{errors?.dealership && (
 								<p className="text-red-500 text-sm italic">
-									Please enter your username
+									Please enter the dealership ID
+								</p>
+							)}
+						</div>
+						<div className="mx-48 mb-4">
+							<label
+								className="block text-white tracking-normal text-md font-bold mb-2"
+								for="dealership"
+							>
+								User Account Name
+							</label>
+							<input
+								className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+								id="dealership"
+								value={username}
+								onChange={(e) => {
+									setusername(e.target.value);
+									seterrors({});
+								}}
+								type="text"
+								placeholder="ID"
+							/>
+							{errors?.username && (
+								<p className="text-red-500 text-sm italic">
+									Please enter a name
 								</p>
 							)}
 						</div>
@@ -85,6 +121,30 @@ const Login = (props) => {
 								</p>
 							)}
 						</div>
+						<div className="mx-48 mb-4">
+							<label
+								className="block text-white tracking-normal text-md font-bold mb-2"
+								for="password"
+							>
+								Confirm Password
+							</label>
+							<input
+								className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+								id="password"
+								value={confirmPassword}
+								onChange={(e) => {
+									setconfirmPassword(e.target.value);
+									seterrors({});
+								}}
+								type="password"
+								placeholder="Confirm Password"
+							/>
+							{errors?.confirmPassword && (
+								<p className="text-red-500 text-sm italic">
+									Passwords have to be same
+								</p>
+							)}
+						</div>
 						<button
 							type="submit"
 							onClick={() => {
@@ -101,8 +161,8 @@ const Login = (props) => {
 	);
 };
 
-Login.propTypes = {
-	login: PropTypes.func.isRequired,
+Register.propTypes = {
+	register: PropTypes.func.isRequired,
 	data: PropTypes.object.isRequired,
 	UI: PropTypes.object.isRequired,
 };
@@ -113,7 +173,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapActionsToProps = {
-	login,
+	register,
 };
 
-export default connect(mapStateToProps, mapActionsToProps)(Login);
+export default connect(mapStateToProps, mapActionsToProps)(Register);
