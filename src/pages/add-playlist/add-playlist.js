@@ -12,6 +12,7 @@ const AddPlaylist = (props) => {
 	const { playlists } = props;
 	const [songs, setsongs] = useState();
 	const [playlist, setplaylist] = useState("");
+	const [playlistState, setplaylistState] = useState(playlists);
 	const [editing, setediting] = useState();
 	const [pending, setpending] = useState([]);
 
@@ -20,6 +21,11 @@ const AddPlaylist = (props) => {
 		props.getPlaylists();
 	}, []);
 
+	useEffect(() => {
+		playlists && setplaylistState(playlists);
+		console.log(playlistState, playlists);
+	}, [props.playlists]);
+
 	const fetchSongs = async () => {
 		let results = await axios.get("/songs");
 		if (results.status === 200) {
@@ -27,10 +33,10 @@ const AddPlaylist = (props) => {
 		}
 	};
 
-	const handleSubmit = () => {
+	const handleSubmit = async () => {
 		if (playlist !== null) {
 			let request = { name: playlist };
-			props.addPlaylist(request);
+			await props.addPlaylist(request);
 			props.getPlaylists();
 		}
 	};
@@ -41,11 +47,11 @@ const AddPlaylist = (props) => {
 		setpending(allSongs);
 	};
 
-	const onConfirm = () => {
+	const onConfirm = async () => {
 		if (pending.length > 0) {
 			let songs = [];
 			pending.forEach((song) => songs.push(song._id));
-			props.addSongsToPlaylist(editing._id, songs);
+			await props.addSongsToPlaylist(editing._id, songs);
 			setediting("");
 			setpending([]);
 			props.getPlaylists();
@@ -64,7 +70,7 @@ const AddPlaylist = (props) => {
 		>
 			<div className="flex flex-1 flex-col">
 				<div className="flex flex-col lg:w-6/12 ">
-					<div className="flex flex-1 flex-col w-full bg-gray-300 bg-opacity-30 mx-30 p-4 m-2">
+					<div className="flex flex-1 flex-col w-full bg-gray-300 bg-opacity-30 mx-30 p-4 m-2 max-h-64">
 						<p className="text-2xl text-white p-2 m-5 rounded font-semibold">
 							Currently editing
 						</p>
@@ -87,7 +93,7 @@ const AddPlaylist = (props) => {
 						</div>
 					</div>
 				</div>
-				<div className="flex flex-1 flex-col lg:w-6/12 bg-gray-300 bg-opacity-30 mx-30 p-4 m-2">
+				<div className="flex flex-1 flex-col w-6/12 bg-gray-300 bg-opacity-30 mx-30 p-4 m-2">
 					<p className="text-2xl text-white p-2 m-5 rounded font-semibold">
 						Create new playlist
 					</p>
@@ -177,9 +183,12 @@ const AddPlaylist = (props) => {
 				<p className="text-4xl text-white font-semibold tracking-wide">
 					All Playlists
 				</p>
-				{playlists.map((element) => (
+				{playlistState.map((element) => (
 					<div
-						onClick={() => setediting(element)}
+						onClick={() => {
+							setediting(element);
+							setpending(element.songs);
+						}}
 						className="p-1 flex flex-row bg-gray-400 bg-opacity-25 w-full justify-center items-center m-2 rounded-lg transition duration-500 ease-in-out transform hover:-translate-y-3 hover:scale-105 cursor-pointer"
 					>
 						<div className="rounded-full flex justify-center items-center mx-1">

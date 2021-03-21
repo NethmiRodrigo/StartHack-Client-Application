@@ -56,7 +56,7 @@ const Rooms = (props) => {
 								<div className="m-2 bg-yellow-100 p-2 rounded-full font-bold">
 									Access ID: {isCreated("Vehicle Handover").accessCode}
 								</div>
-								{isCreated("Vehicle").fcm ? (
+								{isCreated("Vehicle Handover").fcmToken ? (
 									<div className="m-2 bg-green-300 p-2 rounded-full font-bold">
 										Online
 									</div>
@@ -126,7 +126,7 @@ const Rooms = (props) => {
 								<div className="m-2 bg-yellow-100 p-2 rounded-full font-bold">
 									Access ID: {isCreated("Vehicle Display").accessCode}
 								</div>
-								{isCreated("Vehicle Display").fcm ? (
+								{isCreated("Vehicle Display").fcmToken ? (
 									<div className="m-2 bg-green-300 p-2 rounded-full font-bold">
 										Online
 									</div>
@@ -161,7 +161,7 @@ const Rooms = (props) => {
 								<div className="m-2 bg-yellow-100 p-2 rounded-full font-bold">
 									Access ID: {isCreated("Service Lobby").accessCode}
 								</div>
-								{isCreated("Service Lobby").fcm ? (
+								{isCreated("Service Lobby").fcmToken ? (
 									<div className="m-2 bg-green-300 p-2 rounded-full font-bold">
 										Online
 									</div>
@@ -195,7 +195,7 @@ const Rooms = (props) => {
 								<div className="m-2 bg-yellow-100 p-2 rounded-full font-bold">
 									Access ID: {isCreated("Service Outbound").accessCode}
 								</div>
-								{isCreated("Service Outbound").fcm ? (
+								{isCreated("Service Outbound").fcmToken ? (
 									<div className="m-2 bg-green-300 p-2 rounded-full font-bold">
 										Online
 									</div>
