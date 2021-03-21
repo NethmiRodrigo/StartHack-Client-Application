@@ -23,9 +23,9 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
+    "start": "npm start",
+    "build": "npm build",
+    "test": "npm test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
