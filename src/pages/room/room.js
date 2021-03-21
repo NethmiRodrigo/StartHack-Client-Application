@@ -19,12 +19,12 @@ const Room = (props) => {
 	}, []);
 
 	const play = (playlist) => {
-		props.playPlaylist(roomid, playlist._id);
+		props.playPlaylist(room._id, playlist._id);
 		setselected(playlist);
 	};
 
 	const changeVolume = (value) => {
-		props.changeVolume(roomid, value / 10);
+		props.changeVolume(room._id, value / 100);
 	};
 
 	return (
@@ -51,7 +51,7 @@ const Room = (props) => {
 						</div>
 					))}
 				</div>
-				<div className="flex flex-col flex-1 justify-center items-center bg-black rounded mx-10 my-10 p-10">
+				<div className="flex flex-col flex-1 justify-center items-center bg-gray-800 bg-opacity-80 rounded mx-10 my-10 p-10">
 					<h2 className="text-white font-bold text-3xl tracking-wide text-center">
 						{room?.name}
 					</h2>
@@ -59,9 +59,16 @@ const Room = (props) => {
 						{room?.accessCode}
 					</p>
 					<div className="mt-2 p-10 justufy-center items-center">
-						<p className="text-lg text-white font-bold text-center">
-							Now playing:
-						</p>
+						{selected ? (
+							<p className="text-lg text-white font-bold text-center">
+								Now playing:
+							</p>
+						) : (
+							<p className="text-lg text-white font-bold text-center">
+								Change volume
+							</p>
+						)}
+
 						<div className="bg-white bg-opcaity-30 p-5 mt-5 rounded-full w-full m-5 justify-center items-center">
 							{selected ? (
 								<div className="flex flex-1 flex-col justify-center items-center">
@@ -70,38 +77,38 @@ const Room = (props) => {
 											Playlist: {selected.name}
 										</p>
 									</div>
-									<div className="flex flex-1 flex-row mt-2">
-										<div className="rounded-full flex justify-center items-center mx-1">
-											<img
-												alt=""
-												src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtsTcuyBNansTA30-GgEVwkURAPEXnLtlm4A&usqp=CAU"
-												width={50}
-												height={50}
-											/>
-										</div>
-										<div className="slidecontainer">
-											<input
-												type="range"
-												min="0"
-												max="100"
-												value={volume}
-												onInput={(e) => {
-													setvolume(e.target.value);
-												}}
-												onMouseUp={(e) => {
-													changeVolume(e.target.value);
-												}}
-												class="slider"
-												id="myRange"
-											/>
-										</div>
-									</div>
 								</div>
 							) : (
 								<p className="text-base text-black text-center justify-items-center w-full">
 									Select a playlist to play
 								</p>
 							)}
+							<div className="flex flex-1 flex-row mt-2">
+								<div className="rounded-full flex justify-center items-center mx-1">
+									<img
+										alt=""
+										src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtsTcuyBNansTA30-GgEVwkURAPEXnLtlm4A&usqp=CAU"
+										width={50}
+										height={50}
+									/>
+								</div>
+								<div className="slidecontainer">
+									<input
+										type="range"
+										min="0"
+										max="100"
+										value={volume}
+										onInput={(e) => {
+											setvolume(e.target.value);
+										}}
+										onMouseUp={(e) => {
+											changeVolume(e.target.value);
+										}}
+										class="slider"
+										id="myRange"
+									/>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

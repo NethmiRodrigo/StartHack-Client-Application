@@ -20,7 +20,7 @@ import AddPlaylist from "./pages/add-playlist/add-playlist";
 
 import "./App.css";
 
-axios.defaults.baseURL = "http://localhost:5000";
+axios.defaults.baseURL = "https://smarthack.herokuapp.com/";
 
 const token = localStorage.MercToken;
 

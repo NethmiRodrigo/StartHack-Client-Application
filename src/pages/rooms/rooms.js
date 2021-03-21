@@ -39,7 +39,7 @@ const Rooms = (props) => {
 					onClick={() => {
 						if (rooms.length > 0 && !isCreated("Vehicle Handover")) {
 							handlesubmit("Vehicle Handover");
-						} else {
+						} else if (isCreated("Vehicle Handover").fcmToken) {
 							history.push(`/room/${isCreated("Vehicle Handover").accessCode}`);
 						}
 					}}
@@ -74,7 +74,7 @@ const Rooms = (props) => {
 						onClick={() => {
 							if (rooms.length > 0 && !isCreated("Main Service Area")) {
 								handlesubmit("Main Service Area");
-							} else {
+							} else if (isCreated("Main Service Area").fcmToken) {
 								history.push(
 									`/room/${isCreated("Main Service Area").accessCode}`
 								);
@@ -92,7 +92,7 @@ const Rooms = (props) => {
 								<div className="m-2 bg-yellow-100 p-2 rounded-full font-bold">
 									Access ID: {isCreated("Main Service Area").accessCode}
 								</div>
-								{isCreated("Main Service Area").fcm ? (
+								{isCreated("Main Service Area").fcmToken ? (
 									<div className="m-2 bg-green-300 p-2 rounded-full font-bold">
 										Online
 									</div>
@@ -108,7 +108,7 @@ const Rooms = (props) => {
 						onClick={() => {
 							if (rooms.length > 0 && !isCreated("Vehicle Display")) {
 								handlesubmit("Vehicle Display");
-							} else {
+							} else if (isCreated("Vehicle Display").fcmToken) {
 								history.push(
 									`/room/${isCreated("Vehicle Display").accessCode}`
 								);
@@ -145,7 +145,7 @@ const Rooms = (props) => {
 						onClick={() => {
 							if (rooms.length > 0 && !isCreated("Service Lobby")) {
 								handlesubmit("Service Lobby");
-							} else {
+							} else if (isCreated("Service Lobby").fcmToken) {
 								history.push(`/room/${isCreated("Service Lobby").accessCode}`);
 							}
 						}}
@@ -177,7 +177,7 @@ const Rooms = (props) => {
 						onClick={() => {
 							if (rooms.length > 0 && !isCreated("Service Outbound")) {
 								handlesubmit("Service Outbound");
-							} else {
+							} else if (isCreated("Service Outbound").fcmToken) {
 								history.push(
 									`/room/${isCreated("Service Outbound").accessCode}`
 								);
