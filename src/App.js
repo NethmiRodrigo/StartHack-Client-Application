@@ -16,6 +16,7 @@ import Rooms from "./pages/rooms/rooms";
 import Room from "./pages/room/room";
 import Navigation from "./components/navbar/navbar";
 import AddSong from "./pages/add-song/add-song";
+import AddPlaylist from "./pages/add-playlist/add-playlist";
 
 import "./App.css";
 
@@ -50,6 +51,7 @@ function App() {
 							<AuthRoute path="/rooms" component={Rooms} />
 							<AuthRoute path="/room/:roomid" component={Room} />
 							<AuthRoute path="/add-song" component={AddSong} />
+							<AuthRoute path="/add-playlist" component={AddPlaylist} />
 						</div>
 					</Switch>
 				</Router>

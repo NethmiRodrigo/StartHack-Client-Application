@@ -25,9 +25,11 @@ const Navigation = (props) => {
 							</Link>
 						</div>
 						<div className="p-2">
-							<button className="uppercase transition duration-500 ease-in-out hover:bg-gray-100 text-gray-400 font-semibold py-2 px-4 border border-gray-400 rounded shadow transform hover:-translate-y-1 hover:scale-110">
-								Add Playlist
-							</button>
+							<Link to="/add-playlist">
+								<button className="uppercase transition duration-500 ease-in-out hover:bg-gray-100 text-gray-400 font-semibold py-2 px-4 border border-gray-400 rounded shadow transform hover:-translate-y-1 hover:scale-110">
+									Add Playlist
+								</button>
+							</Link>
 						</div>
 						<div className="p-2">
 							<Link to="/rooms">
