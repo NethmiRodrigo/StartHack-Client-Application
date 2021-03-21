@@ -12,7 +12,7 @@ A centralized audio controller web application which can connect to the devices 
   - Login with access code
 
 
-- Server repository - https://github.com/avishkajayasundara/StartHack-Client-Application
+- Server repository - https://github.com/avishkajayasundara/StartHack-Server-Application
   
 - Multi-media player repository - https://github.com/avishkajayasundara/Mercedes-Multimedia-Player
 
