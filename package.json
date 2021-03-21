@@ -23,8 +23,8 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
+    "start": "npm start",
+    "build": "npm run build",
     "test": "craco test",
     "eject": "react-scripts eject"
   },
